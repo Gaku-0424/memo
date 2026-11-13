@@ -1,6 +1,6 @@
 <?php
 
-$host = '127. 0. 0. 1';
+$host = '127.0.0.1';
 $port = 3306;
 $dbname = 'todo';
 $username = 'root';
@@ -16,7 +16,15 @@ try {
 
     $rows = $pdo->query('SELECT * FROM task ORDER BY id DESC')->fetchAll();
 
+
+
+
+    foreach ($rows as $row) {
+        $safeTitle = htmlspecialchars($row['title']);
+        $class = $row['is_done'] ? 'done' : '';
+    }
 } catch (PDOException $e) {
     echo 'データベース接続失敗: ' . $e->getMessage();
     exit;
 }
+
